@@ -6,56 +6,22 @@
   --header-height: 4rem;
 
   /*========== Colors ==========*/
-  --first-color: #3fc060;
-  --first-color-alt: #048654;
-  --title-color: #393939;
-  --logo-dark-color: #162328;
-  --text-color: #707070;
-  --text-color-light: #a6a6a6;
-  --body-color: #f1f1f1;
-  --container-color: #ffffff;
-  --shadow-color: rgba(0, 0, 0, 0.1);
+  --title-color: #ffffff;
+  --text-color: #d6d6d6;
+  --text-color-light: rgba(255, 255, 255, 0.05);
+  --body-color: #10101b;
+  --shadow-color: rgba(255, 255, 255, 0.5);
+  --border-color: rgba(255, 255, 255, 0.1);
+  --container-color: rgba(255, 255, 255, 0.1);
+  --blue-gradient-color: linear-gradient(#2196f3, #e91e63);
+  --pink-gradient-color: linear-gradient(#f00, #f0f);
 
   /*========== Font and Typography ==========*/
   --body-font: "Poppins", sans-serif;
 
-  /* .5rem = 8px, 1rem = 16px, 1.5rem = 24px ... */
-  --big-font-size: 2rem;
-  --h1-font-size: 1.5rem;
-  --h2-font-size: 1.25rem;
-  --h3-font-size: 1.125rem;
-  --normal-font-size: 0.938rem;
-  --small-font-size: 0.813rem;
-  --smaller-font-size: 0.75rem;
-
-  /*========== Font Weight ==========*/
-  --font-medium: 500;
-  --font-semi-bold: 600;
-
-  /*========== Margins ==========*/
-  /* .25rem = 4px, .5rem = 8px, .75rem = 12px ... */
-  --mb-1: 0.5rem;
-  --mb-2: 1rem;
-  --mb-3: 1.5rem;
-  --mb-4: 2rem;
-  --mb-5: 2.5rem;
-  --mb-6: 3rem;
-
-  /*========== Z-index ==========*/
-  --z-tooltip: 10;
-  --z-fixed: 100;
-}
-
-@media screen and (min-width: 768px) {
-  :root {
-    --big-font-size: 3rem;
-    --h1-font-size: 2.25rem;
-    --h2-font-size: 1.5rem;
-    --h3-font-size: 1.25rem;
-    --normal-font-size: 1rem;
-    --small-font-size: 0.875rem;
-    --smaller-font-size: 0.813rem;
-  }
+  /*========== Border Radius ===========*/
+  --border-outside-radius: 15px;
+  --border-inside-radius: 20px;
 }
 
 /*========== BASE ==========*/
@@ -68,12 +34,13 @@ html {
   scroll-behavior: smooth;
 }
 body {
-  margin: var(--header-height);
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  min-height: 100vh;
   font-family: var(--body-font);
-  font-size: var(--normal-font-size);
   background: var(--body-color);
   color: var(--text-color);
-  line-height: 1.6;
 }
 
 /*========== CSS Reset ==========*/
@@ -97,3 +64,105 @@ img {
 }
 
 /*========== CLASS CSS ==========*/
+
+/*Bolinha background 1:*/
+main::after {
+  content: "";
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background: var(--blue-gradient-color);
+  clip-path: circle(30% at left 10%);
+  z-index: -1;
+}
+/*Bolinha background 2:*/
+main::before {
+  content: "";
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background: var(--pink-gradient-color);
+  clip-path: circle(30% at right 70%);
+}
+
+.container {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  max-width: 1200px;
+  flex-wrap: wrap;
+}
+
+.card {
+  position: relative;
+  width: 17rem;
+  height: 23rem;
+  margin: 1rem;
+  box-shadow: 20px 20px 50px rgba(0, 0, 0, 0.5);
+  border-radius: var(--border-outside-radius);
+  background: var(--container-color);
+  overflow: hidden;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  border-top: 1px solid var(--border-color);
+  border-left: 1px solid var(--border-color);
+  /* Gaussian blur background: */
+  backdrop-filter: blur(30px);
+}
+
+.content {
+  padding: 35px;
+  text-align: center;
+  transition: 0.5s;
+  /* To make the hover effect: */
+  transform: translateY(8rem);
+  opacity: 0;
+}
+.card:hover .content {
+  transform: translateY(0);
+  opacity: 1;
+}
+
+.number {
+  position: absolute;
+  top: -3rem;
+  right: 1.2rem;
+  font-size: 7rem;
+  color: var(--text-color-light);
+  font-family: var(--body-font);
+  font-weight: 700 !important;
+  /* Don't change cursor on hover: */
+  pointer-events: none;
+}
+
+.title {
+  margin-top: 0.8rem;
+  font-size: 1.6rem;
+  font-weight: 600;
+  color: var(--title-color);
+  z-index: 1;
+}
+
+.text {
+  margin-top: 0.5rem;
+  font-size: 0.9rem;
+  font-weight: 100;
+  color: var(--text-color);
+}
+
+.btn {
+  position: relative;
+  display: inline-block;
+  padding: 8px 20px;
+  margin-top: 1.5rem;
+  background: #fff;
+  font-weight: 600;
+  color: #000;
+  border-radius: var(--border-inside-radius);
+  box-shadow: 0 2px 10px var(--shadow-color);
+}
